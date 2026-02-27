@@ -1,8 +1,8 @@
-﻿namespace MauiApp1;
+﻿namespace MauiApp1.Views;
 
-public partial class MainPage : ContentPage
+public partial class BiometricsPage : ContentPage
 {
-	public MainPage()
+	public BiometricsPage()
 	{
 		InitializeComponent();
 	}

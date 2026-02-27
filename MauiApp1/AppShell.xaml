@@ -4,11 +4,23 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiApp1"
+    xmlns:views="clr-namespace:MauiApp1.Views"
     Title="MauiApp1">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+
+        <Tab Title="BMI">
+            <ShellContent ContentTemplate="{DataTemplate views:BiometricsPage}"/>
+        </Tab>
+
+        <Tab Title="TODO LIST">
+            <ShellContent ContentTemplate="{DataTemplate views:ToDoListPage}"/>
+        </Tab>
+
+        <!-- <Tab Title="Profile">
+            <ShellContent ContentTemplate="{DataTemplate local:ProfilePage}"/>
+        </Tab> -->
+
+    </TabBar>
 
 </Shell>
