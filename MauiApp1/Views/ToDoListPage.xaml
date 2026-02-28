@@ -3,53 +3,68 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.Views.ToDoListPage">
 
-    <VerticalStackLayout Padding="30"
-                         Spacing="20"
-                         VerticalOptions="Center">
+    <VerticalStackLayout Padding="20"
+                         Spacing="15">
 
-        <Label Text="My Tasks"
+        <Label Text="TO DO List"
                FontSize="32"
                HorizontalOptions="Center"
                FontAttributes="Bold"/>
 
-        <Grid ColumnDefinitions="*, Auto"
+        <Entry x:Name="TitleEntry"
+               Placeholder="Enter Task Title..."
+               FontAttributes="Bold"/>
+        <Entry x:Name="DetailsEntry"
+               Placeholder="Enter Task Details..."/>
+
+        <Grid ColumnDefinitions="*, *"
               ColumnSpacing="10">
-            <Entry x:Name="TaskEntry"
-                   Grid.Column="0"
-                   Placeholder="Enter a new task..."/>
+            <Button Grid.Column="0"
+                    x:Name="SaveButton"
+                    Text="Add Task"
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="#2b0b98"
+                    TextColor="White"/>
 
             <Button Grid.Column="1"
-                    Text="Add"
-                    Clicked="OnAddTaskClicked"
-                    BackgroundColor="#2b0b98"
+                    Text="Clear / Cancel"
+                    Clicked="OnClearClicked"
+                    BackgroundColor="Gray"
                     TextColor="White"/>
         </Grid>
 
-        <CollectionView x:Name="TasksCollectionView"
-                        HeightRequest="300">
-            <CollectionView.ItemTemplate>
+        <ListView x:Name="ToDoListView"
+                  HasUnevenRows="True"
+                  ItemSelected="OnItemSelected"
+                  Margin="0, 20, 0, 0">
+            <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="*, Auto"
-                          Padding="10"
-                          Margin="0,5">
+                    <ViewCell>
+                        <Grid ColumnDefinitions="*, Auto"
+                              Padding="10">
 
-                        <Label Grid.Column="0"
-                               Text="{Binding .}"
-                               VerticalOptions="Center"
-                               FontSize="18"/>
+                            <VerticalStackLayout Grid.Column="0"
+                                                 VerticalOptions="Center">
+                                <Label Text="{Binding Title}"
+                                       FontAttributes="Bold"
+                                       FontSize="18"
+                                       TextColor="#2b0b98"/>
+                                <Label Text="{Binding Details}"
+                                       FontSize="14"
+                                       TextColor="DimGray"/>
+                            </VerticalStackLayout>
 
-                        <Button Grid.Column="1"
-                                Text="X"
-                                TextColor="Red"
-                                BackgroundColor="Transparent"
-                                FontAttributes="Bold"
-                                CommandParameter="{Binding .}"
-                                Clicked="OnDeleteTaskClicked"/>
-                    </Grid>
+                            <Button Grid.Column="1"
+                                    Text="Delete"
+                                    TextColor="Red"
+                                    BackgroundColor="Transparent"
+                                    CommandParameter="{Binding .}"
+                                    Clicked="OnDeleteClicked"/>
+                        </Grid>
+                    </ViewCell>
                 </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </VerticalStackLayout>
-
 </ContentPage>
