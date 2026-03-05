@@ -1,70 +1,62 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp1.Views.ToDoListPage">
+             x:Class="MauiApp1.Views.ToDoListPage"
+             >
+    
+    
+    <Grid RowDefinitions="Auto, *" Padding="20" RowSpacing="15">
+        
+        <VerticalStackLayout Grid.Row="0" Spacing="15">
+            <Label Text="TO DO List"
+                   FontSize="32"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"/>
+            <Entry x:Name="TitleEntry" Placeholder="Enter Task Title..." FontAttributes="Bold" />
+            <Entry x:Name="DetailsEntry" Placeholder="Enter Task Details..." />
+            
+            
+            <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                <Button Grid.Column="0" 
+                        x:Name="SaveButton" 
+                        Text="Add Task" 
+                        Clicked="OnSaveClicked" 
+                        BackgroundColor="#2b0b98" 
+                        TextColor="White"/>
+                        
+                <Button Grid.Column="1" 
+                        Text="Clear / Cancel" 
+                        Clicked="OnClearClicked" 
+                        BackgroundColor="Gray" 
+                        TextColor="White"/>
+            </Grid>
+        </VerticalStackLayout>
 
-    <VerticalStackLayout Padding="20"
-                         Spacing="15">
-
-        <Label Text="TO DO List"
-               FontSize="32"
-               HorizontalOptions="Center"
-               FontAttributes="Bold"/>
-
-        <Entry x:Name="TitleEntry"
-               Placeholder="Enter Task Title..."
-               FontAttributes="Bold"/>
-        <Entry x:Name="DetailsEntry"
-               Placeholder="Enter Task Details..."/>
-
-        <Grid ColumnDefinitions="*, *"
-              ColumnSpacing="10">
-            <Button Grid.Column="0"
-                    x:Name="SaveButton"
-                    Text="Add Task"
-                    Clicked="OnSaveClicked"
-                    BackgroundColor="#2b0b98"
-                    TextColor="White"/>
-
-            <Button Grid.Column="1"
-                    Text="Clear / Cancel"
-                    Clicked="OnClearClicked"
-                    BackgroundColor="Gray"
-                    TextColor="White"/>
-        </Grid>
-
-        <ListView x:Name="ToDoListView"
-                  HasUnevenRows="True"
-                  ItemSelected="OnItemSelected"
-                  Margin="0, 20, 0, 0">
+        <ListView x:Name="ToDoListView" 
+                  Grid.Row="1"
+                  HasUnevenRows="True" 
+                  ItemSelected="OnItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid ColumnDefinitions="*, Auto"
-                              Padding="10">
-
-                            <VerticalStackLayout Grid.Column="0"
-                                                 VerticalOptions="Center">
-                                <Label Text="{Binding Title}"
-                                       FontAttributes="Bold"
-                                       FontSize="18"
-                                       TextColor="#2b0b98"/>
-                                <Label Text="{Binding Details}"
-                                       FontSize="14"
-                                       TextColor="DimGray"/>
+                        <Grid ColumnDefinitions="*, Auto" Padding="10">
+                            
+                            <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="18" TextColor="#2b0b98"/>
+                                <Label Text="{Binding Details}" FontSize="14" TextColor="DimGray" />
                             </VerticalStackLayout>
-
-                            <Button Grid.Column="1"
-                                    Text="Delete"
-                                    TextColor="Red"
+                            
+                            <Button Grid.Column="1" 
+                                    Text="Delete" 
+                                    TextColor="Red" 
                                     BackgroundColor="Transparent"
                                     CommandParameter="{Binding .}"
-                                    Clicked="OnDeleteClicked"/>
+                                    Clicked="OnDeleteClicked" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-    </VerticalStackLayout>
+        
+    </Grid>
 </ContentPage>
